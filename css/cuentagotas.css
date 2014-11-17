@@ -1,0 +1,169 @@
+/* 
+    Document   : cuentagotas
+    Created on : 06-oct-2014, 18:28:15
+    Author     : Daniel
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+
+
+.weather-info-value   {
+	color: #080CC7;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 800;
+	font-size: 20px;
+	position: relative;
+	float: left;
+	text-align: center;
+	margin: 0 auto;
+	padding-left: 18px;
+}
+.weather-temperature {
+	font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-weight: 900;
+	font-size: 45px;
+	color: #070000;
+	text-align: center;
+}
+.weather-info-type {
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 300;
+	text-align: center;
+	font-size: 14px;
+	position: static;
+	float: left;
+	clear: both;
+	padding-left: 20px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.col-xs-4 {
+
+
+}
+.weather-humidity {
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: center;
+	left: 10%;
+	background-color: #52C3D5;
+	border-width: thin;
+	border-color: #08EFEB;
+}
+.weather-wind {
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: center;
+	background-color: #52C3D5;
+}
+.weather-rain {
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: center;
+	background-color: #52C3D5;
+}
+.weather-pressure {
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: center;
+	background-color: #52C3D5;
+}
+.weather-evap {
+	display: block;
+	float: left;
+	width: 100%;
+	text-align: center;
+	background-color: #52C3D5;
+}
+.weather-content {
+	display: block;
+	text-align: center;
+	width: 250px;
+	background-color: #ABE2EB;
+	position: static;
+	background-origin: content-box;
+	margin: 0 auto;
+	background-repeat: repeat;
+}
+.weather-content .date {
+	font-size: small;
+	font-weight: bold;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+}
+.weather-content .hour {
+	font-size: small;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+	font-weight: bold;
+}
+.weather-content .weather-information-mas {
+	width: 250px;
+	background-color: #ABE2EB;
+}
+.weather-humidity .weather-info-type {
+
+
+}
+.col-xs-4 .weather-wind .weather-info-type {
+	text-align: center;
+}
+.weather-content .fechahora {
+	background-color: #52C3D5;
+}
+.weather-content .emas h2 {
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+	color: #EEF255;
+	font-weight: 500;
+	vertical-align: middle;
+}
+.weather-content .emas {
+	vertical-align: middle;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #000000;
+	
+}
+.fluid.tabla table {
+	margin: 0 auto;
+}
+tbody tr .impar {
+	background-color: #D2F1F9;
+	height: 10px;
+	font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+	border-top-style: none;
+	font-size: small;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+tbody tr .par {
+	height: 20px;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+	padding-top: 5px;
+	text-align: right;
+	font-weight: bold;
+	color: #0A0FF4;
+	background-color: #CDEAF9;
+}
+tbody tr #nr {
+	color: #FFFFFF;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+	font-size: large;
+	text-align: center;
+	background-color: #83F690;
+	padding-top: 5px;
+	padding-bottom: 6px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}

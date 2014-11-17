@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=medium-dpi" />
+		<link rel="stylesheet" href="themes/Bootstrap.css">
+                <link href="libs/jQueryMobile/jquery.mobile.structure-1.4.4.min.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+                <script src="libs/jquery-2.0.3.min.js" type="text/javascript"></script>
+                <script src="libs/jQueryMobile/jquery.mobile-1.4.4.min.js" type="text/javascript"></script>
+        
+        <link href="css/sistemas.css" rel="stylesheet" type="text/css"/>
+        <link href="css/cuentagotas.css" rel="stylesheet" type="text/css"/>
+        <script src="js/clienterest.js" type="text/javascript"></script>
+        <script src="js/semaforo.js" type="text/javascript"></script>
+        <script src="js/geo.js" type="text/javascript"></script>
+        <script src="js/cuentagotas.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            
+                // consultamos si exite conexion a la red
+                document.addEventListener("deviceready", onDeviceReady, false);
+                function onDeviceReady() {
+                   //window.plugins.insomnia.keepAwake();// plugin de PhoneGAP para dejar la pantalla encendida (cargado en config.xml)
+                   document.addEventListener("offline", isOffline(), false); //Fuera de red
+                   document.addEventListener("online", isOnline(), false);   //En red// sigue en cuentagotas.js
+                   //navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS);
+                    //buscardatosHistoricos();
+                   document.addEventListener("backbutton", function(e){
+                            if($.mobile.activePage.is('#homepage')){
+                                e.preventDefault();
+                               //window.plugins.toast.showLongCenter("Gracias por utilizar CuentaGOTAS!!");
+                                navigator.app.exitApp();
+                            }
+                            else {
+                                navigator.app.backHistory()
+                            }
+                        }, false);
+
+                  }
+              
+        </script>
+
+        <title>CuentaGOTAS</title>
+    </head>
+    <body onLoad="onDeviceReady();">
+        <div id="app">
+            <div id="homepage" data-role="page" >
+                <div data-role="header">
+                        <h1>CuentaGOTAS</h1>
+                </div>
+
+                <div data-role="content" >
+                <table>
+                <tr>
+                  <th rowspan="4">
+                 
+                    <div id="logoContainer" class="centerText">
+                            <img src="images/logo.png" width="117" height="144" id="logo"  />
+                    </div>
+                    
+                    </th>
+                     <td>Conexiones </td>
+                     <tr>
+                    <td width="73" align="Left" valign="middle" bgcolor="#FFFFFF" >GPS:<td>
+                    <div id="gps"></div></td></tr>
+                    <tr><td width="73" align="left" valign="middle" bgcolor="#FFFFFF" >Red:<td>
+                       <div id="net"></div></td></tr>
+                  <!--  <tr>
+                    <td align="left" valign="top">Datos:</td> <td>                 
+                    <div id="main"></div>
+                    </td>
+                    </tr>  -->
+                   
+                    </table>
+                  <!--  <div id="estaciones">
+                    <label for="esta">Estaciones Meteorológicas</label>
+                    <select id="esta" data-native-menu="false" data-theme="f">
+                    </select>
+                    </div>
+                  -->
+                  <form id="formulario" data-transition="pop">
+                    <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
+                            <label class="select ui-select" for="select-choice-a">Seleccione Estación:</label>
+                            <div class="ui-select">
+
+                            <select id="select-choice-a" data-native-menu="false" name="select-choice-a" tabindex="-1" data-mini="true">
+                           <option>Estaciones Meteorológicas</option> 
+                       <!-- <option value="1">Estación 1</option> -->
+                            </select>
+                                
+                             </div>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                    <legend>Frutales:</legend>
+                                    <input type="radio" name="frutal" id="radio-choice-c" value="0" checked="checked" style="alignment-adjust:central" />
+                                    <label for="radio-choice-c">Manzano</label>
+                                    <input type="radio" name="frutal" id="radio-choice-d" value="1" />
+                                    <label for="radio-choice-d">Peral</label>
+                                    <input type="radio" name="frutal" id="radio-choice-b" value="2" />
+                                    <label for="radio-choice-b">F. de Carozo</label>
+                        </fieldset>
+                    </div> 
+                    <div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
+                            <label class="select ui-select" for="epoca">Estado del Cultivo:</label>
+                            <div class="ui-select">
+
+                            <select id="epoca" data-native-menu="false" name="epoca" tabindex="-1"  data-mini="true">
+                         <!--  <option>Estaciones Meteorológicas</option> -->
+                             <option value="0">Comienzo de temporada</option>
+                             <option value="1">Mediados de temporada</option>
+                             <option value="2">Cerca de la cosecha</option>
+                             <option value="3">Después de la cosecha</option>
+                            </select>
+                            </div>
+                    </div>    
+                    <div data-role="fieldcontain">
+                            <label for="cobertura">Porcentaje de cobertura:</label>
+                            <input type="range" name="cobertura" id="cobertura" value="50" min="0" max="100" step=10 data-highlight="true"  />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                                    <legend>Tipo de Riego:</legend>
+
+                                    <input type="radio" name="tipoRiego" id="goteo" value="0.9" checked="checked" />
+                                    <label for="goteo">Por goteo</label>
+                                    <input type="radio" name="tipoRiego" id="micro" value="0.8" />
+                                    <label for="micro">Por Microaspersión</label>                                    
+                        </fieldset>
+                    </div>                      <!--        <input id="submitid" type="submit" value="Calculadora de Riego" data-theme="f"/> -->
+                  </form>
+                    <div id="resul"></div>
+                    <div id="menu">
+                         <a data-icon="flat-checkround" data-theme="d" href="#second-page" data-role="button" onclick="seleccion()" >Calculadora de Riego</a>
+                   
+
+                    </div>
+              </div>
+             
+            <div data-role="footer">
+            		<a href="#third-page" data-icon="info" data-theme="b" data-role="button" data-mini="true" data-inline="true" onclick="verDatosEMA();">Datos EMA</a>
+                    <a href="#acerca" data-icon="check" data-theme="b" data-role="button" data-mini="true" data-inline="true" class="ui-btn-right">Acerca de</a>
+                </div>   
+            </div><!-- /page  -->
+<!-- ---------------------------------------------------------------------------------------------------   -->            
+            <!-- /Segunda pagina  -->
+            <div data-role="page" id="second-page" data-title="Necesidad de Riego">
+                <div data-role="header">
+                	<a href="#homepage" data-icon="back" data-theme="b">Inicio</a>
+                    <h3>Riego</h3>
+                </div>
+                <div data-role="content" id="riego">
+               <!--     <span id="estacionAuto">1</span>
+                    <span id="tipoFrutal">2</span>
+                    <span id="estadoCultivo">3</span>
+                    <span id="porcentajeCob">4</span>
+                    <span id="tipoRiego">5</span>
+                    <div id="resulta2">  </div>
+                 -->   
+                    
+                     <div class="fluid tabla"><table width="250" border="0" cellspacing="2" cellpadding="1">
+                        <tbody>
+                          <tr>
+                            <td class="impar">Estación Meteorológica</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="estacionAuto">&nbsp</td>
+                          </tr>
+                          <tr>
+                            <td class="impar">Tipo de frutal</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="tipoFrutal">&nbsp</td>
+                          </tr>
+                          <tr>
+                            <td class="impar">Epoca del cultivo</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="estadoCultivo">&nbsp</td>
+                          </tr>
+                          <tr>
+                            <td class="impar">Coeficiente de Cobertura</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="porcentajeCob">&nbsp</td>
+                          </tr>
+                          <tr>
+                            <td class="impar">Tipo de riego</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="tipoRiego">&nbsp</td>
+                          </tr>
+                          <tr>
+                            <td class="impar">Nr = Epan* Kp * Kr * MP / EP</td>
+                          </tr>
+                          <tr>
+                            <td class="par" id="nr">&nbsp</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                </div>
+                <div data-role="footer">
+                    <h4>pie de segunda pagina</h4>
+                </div>
+            </div>
+<!-- ---------------------------------------------------------------------------------------------------   -->                        
+            <!-- /tercer pagina  -->
+            <div data-role="page" id="third-page" data-title="Datos de la EMA">
+                <div data-role="header">
+                    <a href="#homepage" data-icon="back" data-theme="b">Inicio</a>
+                    <h1>Datos de la EMA</h1>
+                </div>
+                <div data-role="content" id="datosMeteo">
+                    <!--    <div id="ema"></div>
+                        <div id="resultados">  </div>-->
+                    
+                    <!--   Datos de estacion meteorologicca -->
+                    <div class="weather-content">
+                        <div class="emas" id="emas"><h2 id="ema"></h2></div>
+                        <div class="fechahora">
+                             <span class="date" id="date"></span>
+                         <span class="hour" id="hour"></span>
+                        </div>
+                        <div class="weather-information">
+
+                                 <div class="weather-temperature" id="temperatura"></div>
+
+                         </div>
+                         <div class="weather-information-mas">
+                                     <div class="col-xs-4">
+                                             <div class="weather-humidity">
+                                                     <span class="weather-info-value" id="humedad"></span>
+                                                     <span class="weather-info-type"><span>Humedad</span></span>
+                                             </div>
+                                     </div>
+                                     <div class="col-xs-4">
+                                             <div class="weather-pressure">
+                                                     <span class="weather-info-value" id="presion"></span>
+                                                     <span class="weather-info-type">Presión</span>
+                                             </div>
+                                     </div>
+                             <div class="col-xs-4">
+                                    <div class="weather-wind"><span class="weather-info-value" id="viento"></span> <span class="weather-info-type">Viento</span></div>
+                             </div>
+                             <div class="col-xs-4">
+                                             <div class="weather-rain">
+                                                     <span class="weather-info-value" id="lluvia"></span>
+                                                     <span class="weather-info-type">Lluvia</span>
+                                             </div>
+                             </div>
+                             <div class="col-xs-4">
+                                             <div class="weather-evap">
+                                                     <span class="weather-info-value" id="evaporacion"></span>
+                                                     <span class="weather-info-type">Indice de Evaporación</span>
+                                             </div>
+                             </div>
+                         </div>
+                     </div>
+                    
+                    
+                    
+                </div>
+                
+            </div>
+<!-- ---------------------------------------------------------------------------------------------------   -->                        
+            <div data-role="page" id="acerca" data-title="Grupo de desarrollo">
+                <div data-role="header">
+                    <a href="#homepage" data-icon="back" data-theme="b">Inicio</a>
+                    <h1>Acerca de CuentaGOTAS</h1>
+                </div>
+                <div data-role="content" id="main">
+                <div 
+                id="somos">
+                    <h3>Diseño y programación:</h3>
+                    <p> - TSAW. Lorena Gonzalez</p>
+                    <p> - TSAW. Daniel Toth</p>
+                    <h3>Tutor:</h3>
+                    <p> - Lic. Pablo Kogan</p></div>
+                    <div id="logos">
+                    <div align="left" class="logo_unco" id="logo_unco" width="80" height="80"><img src="images/uncesp.jpg" width="80" height="80" alt="Uncomahue"></div><div id="logo_fai"><img src="images/fai.jpg" width="80" height="80" alt="Fai"></div>
+                    <div id="logo_inta"><img src="images/logo_inta.png" width="90" height="78" alt=""/></div>
+                   
+                       
+                     </div>   
+                </div>
+            </div>
+  <!-- ---------------------------------------------------------------------------------------------------   -->                     
+        </div>
+
+      
+
+ 
+    </body>
+</html>
